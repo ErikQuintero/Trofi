@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+    <bean
+       class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+       <property name="location">
+          <value>MySQLConeccion.properties</value>
+       </property>
+    </bean>
+ 
+    <bean id="ejemploMVCDS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driverClassName}" />
+        <property name="url" value="${urlBD}" />
+        <property name="username" value="${user}" />
+        <property name="password" value="${password}" />
+    </bean>
+    
+     <bean id="clienteDAO" class="modelo.ClienteDAO">
+        <property name="dataSource" ref="ejemploMVCDS"/>
+    </bean>
+    
+    <bean id="administradorDAO" class="modelo.AdministradorDAO">
+        <property name="dataSource" ref="ejemploMVCDS"/>
+    </bean>
+    
+    <bean id="repartidorDAO" class="modelo.RepartidorDAO">
+        <property name="dataSource" ref="ejemploMVCDS"/>
+    </bean>
+    
+</beans>
